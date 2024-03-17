@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+<div align="center">
+    <form action="/tosale" method="post" th:object="${cart}">
+	<lable>productcode  : <a th:text="${cart.code}" name="code" /></lable><br>
+    <lable>productname  : <a th:text="${cart.name}" name="name"/></lable><br>
+    <lable>sellingprice : <a  th:text="${cart.price}" name="price"/></lable><br>
+    <lable>Quantity     : <a th:text="${cart.quantity}" name="quantity"/></lable><br>
+    <lable>purchaseQuantity     : <input type="number" name="purchasequantity"/></lable><br>
+     <button type=submit>Buy</button>
+     </form>
+</div>   
+
+</body>
+</html>
+

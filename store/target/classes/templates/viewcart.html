@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+<div align="center">
+	<form action="/" method="GET">  
+			 <button type=submit>Back to Home</button>
+        </form> </div><br><br>
+<div align="center">
+    <form action="/sale" th:each="product : ${product}" method="post">
+	
+	<div><lable>Bill No      : <input type="number" name="billno"/></lable></div><br>
+	<div><lable>productcode  : <input th:field="${product.productcode}"/></a></lable></div><br>
+   <div> <lable>productname  : <input th:field="${product.productname}"/></a></lable></div><br>
+   <div> <lable>sellingprice : <input th:field="${product.sellingprice}"/></lable></div><br>
+    <div><lable>Quantity     : <input th:field="${product.qoh}"/></lable></div><br>
+   <div> <lable>purchaseQuantity     : <input type="number" name="purchasequantity"/></lable></div><br>
+    <div> <button type=submit>Buy</button>
+     </form>
+</div>   
+
+</body>
+</html>

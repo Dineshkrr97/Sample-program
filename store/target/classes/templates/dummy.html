@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+
+<form th:action="@{/salesForm}" method="post" class="mainData"
+        id="form">
+        <div class="buttonBar" id="mainbutton">
+            <div>
+                <button class="btn" id="save" type="submit">
+                    <img th:src="@{/resources/images/save.svg}" /> Save
+                </button>
+                <button class="btn" id="reset" onclick="clearForm()" type="reset">
+                    <img th:src="@{/resources/images/reset.svg}" /> Reset
+                </button>
+                <button type="button" class="btn" id="clientNew">
+                    <img th:src="@{/resources/images/notebook.svg}" /> Client Creation
+                </button>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="mp-pusher" id="mp-pusher">
+                <nav id="mp-menu" class="mp-menu"></nav>
+                <div class="scroller-inner"></div>
+
+                <div class="containerMain">
+                    <div class="mainArea">
+                        <div class="inputArea">
+
+                            <div class="ccode">
+                                <lable class="lable">Client code</lable>
+                                <input type="text" class="inputfield" id="ccode"
+                                    th:field="*{salesBean.client.clientId}" />
+                                <button type="button" class="inputbutton" id="clientData"></button>
+                            </div>
+
+                            <div>
+                                <ul class="tabs" data-persist="true">
+                                    <li><a href="#tab1" id="first">Basic data</a></li>
+                                    <li><a href="#tab2" id="second">Payment</a></li>
+                                </ul>
+
+                                <div class="tabcontents">
+                                    <div id="tab1">
+                                        <div class="invNo">
+                                            <lable class="lable">Invoice number</lable>
+                                            <input type="text" id="invNo" th:field="*{salesBean.salesId}"
+                                                name="salesId" class="inputfield disabled"
+                                                readonly="readonly" />
+                                        </div>
+
+                                        <div class="invdate calendar">
+                                            <lable class="lable">Invoice date</lable>
+                                            <input type="date" class="inputfield" id="invdate"
+                                                th:field="*{salesBean.invoiceDate}" /> <span
+                                                class="calendar"><img
+                                                th:src="@{/resources/images/calendar.svg}" /></span>
+                                        </div>
+
+                                        <div class="txtChallan">
+                                            <lable class="lable">Challan number</lable>
+                                            <input type="text" class="inputfield" id="txtChallan"
+                                                th:field="*{salesBean.challanNumber}" />
+                                        </div>
+
+                                        <div class="txtChallDt calendar">
+                                            <lable class="lable">Date</lable>
+                                            <input type="date" class="inputfield" id="txtChallDt"
+                                                th:field="*{salesBean.challanDate}" /> <span
+                                                class="calendar"><img
+                                                th:src="@{/resources/images/calendar.svg}" /></span>
+                                        </div>
+
+                                        <div class="txtPO">
+                                            <lable class="lable">P. O. ID</lable>
+                                            <input type="text" class="inputfield" id="txtPO"
+                                                th:field="*{salesBean.purchaseOrderId}" />
+                                        </div>
+
+                                        <div class="txtPoDt calendar">
+                                            <lable class="lable">Date</lable>
+                                            <input type="date" class="inputfield" id="txtPoDt"
+                                                th:field="*{salesBean.purchaseOrderDate}" /> <span
+                                                class="calendar"><img
+                                                th:src="@{/resources/images/calendar.svg}" /></span>
+                                        </div>
+                                    </div>
+
+                                    <div id="tab2">
+                                        <div class="txtCash">
+                                            <lable class="lable">Cash</lable>
+                                            <input type="number" class="inputfield" id="txtCash"
+                                                th:field="*{paymentBean.cash}" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- tabcontents -->
+                            </div>
+                            <!-- blank -->
+                            <!-- for autocomplete -->
+                            <div class="ui-widget" id="autocomplete_desc">
+                                <div class="tableArea">
+                                    <div class="tablePanel">
+                                        <div class="tableButtonBar">Material entry</div>
+                                        <section class="tableHolder">
+                                            <table id="invoicetable" class="transactionTable table"
+                                                cellpadding="0" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Serial</th>
+                                                        <th>Description</th>
+                                                        <th>Nos.</th>
+                                                        <th>Quantity</th>
+                                                        <th>Rate</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        th:each="salesProduct, stat: *{salesProductFormBean.salesProducts}">
+                                                        <td th:text="${stat.count}">1</td>
+
+                                                        <td><input type="text"
+**Line no: 290**                                                            th:field="*{salesProduct[__${stat.index}__].numbers}" /></td>
+                                                        <td><select type="select" class="selectfield"
+                                                            id="product"
+                                                            th:field="*{salesProduct[__${stat.index}__].product.productId}">
+                                                                <option value="Select"></option>
+                                                                <option th:each="prdList : ${productList}"
+                                                                    th:value="${prdList.productId}"
+                                                                    th:text="${prdList.productName}"></option>
+                                                        </select></td>
+                                                      <td><input type="number"
+                                                            th:field="*{salesProduct[__${stat.index}__].quantity}" /></td>
+                                                        <td><input type="number"
+                                                            th:field="*{salesProduct[__${stat.index}__].rate}" /></td>
+                                                        <td><input type="number"
+                                                            th:field="*{salesProduct[__${stat.index}__].amount}" /></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+                                    </div>
+                                    <!-- tablePanel -->
+                                </div>
+                                <!-- tableArea -->
+                            </div>
+                        </div>
+                        <!-- inputArea -->
+
+                    </div>
+                    <!-- mainArea -->
+                </div>
+                <!-- containerMain -->
+            </div>
+            <!-- /container -->
+        </div>
+    </form>
+
+</body>
+</html>
+
+
+
+<div align="center">
+        <h1>sale Product</h1>
+        <br />
+                  
+	<form action="/aftersale" th:each="product : ${product}" method="post">
+	<lable>productcode  : <input th:field="*{product.productcode}"/></a></lable><br>
+    <lable>productname  : <input th:field="*{product.productname}"/></a></lable><br>
+    <lable>sellingprice : <input th:field="*{product.sellingprice}"/></lable><br>
+    <lable>Quantity     : <input th:field="*{product.qoh}"/></lable><br>
+    <lable>purchaseQuantity     : <input type="number" name="quantity"/></lable><br>
+     <button type=submit>save</button><br><br><br>
+     </form>
+      
+    </div>  
+    
+    <h2>To Display All Sale Product</h2><br>
+         <form action="/displaySaleProducts" method="GET">  
+			 <button type=submit>Display Product</button>
+        </form>
+     <a th:href="/@{'/cart/' + ${product.productcode}}">Buy</a>
+     
+     
+     
+ <td th:text="${cart.totalAmount()}">Total</td>
+ <h3>
+        
+         <span th:text="'Total Amount ' + ${sum}"></span>
+    </h3>
+    
+    
+    
+    <td> <button type="submit" name="action">Buy</button></td>
+                <form action="#" th:action="@{/addtocart}" th:object="${sale}" method="post">
+                </form>

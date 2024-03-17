@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+	<div align="center">
+	<form action="/" method="GET">  
+			 <button type=submit>Back to Home</button>
+        </form> </div><br><br>
+        
+	<div align="center">
+ <form action="/beforeupdate" method="post">
+       <div><lable>Product Code: <input type="text" name="productcode" /></lable></div><br>
+       
+        <button type=submit>Find</button>
+        </form>
+         </div>
+ <div align="center">
+        <h1>Update Product</h1>
+        <br />
+                  
+	<form action="/afterupdate" th:each="product : ${product}" method="post">
+	<div><lable>productcode  : <input th:field="${product.productcode}"/></a></lable></div> <br>
+    <div><lable>productname  : <input th:field="${product.productname}"/></a></lable></div> <br>
+   <div> <lable>purchaseprice: <input th:field="${product.purchaseprice}"/></a></lable></div> <br>
+    <div><lable>sellingprice : <input th:field="${product.sellingprice}"/></lable></div> <br>
+    <div><lable>Quantity     :  <input type="number" name="qoh"/></lable></div> <br>
+     <button type=submit>save</button>
+     </form>
+      
+    </div>  
+
+</body>
+</html>
